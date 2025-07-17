@@ -106,3 +106,20 @@ export const createNewApiKey = async (req, res) => {
         res.status(500).json({error: 'Error creating API Key'});
     }
 }
+
+export const getUserApiKeys = async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const user = await User.findById(userId);
+
+        if(!user) {
+            return res.status(404).json({message: 'User not found'});
+        }
+
+        const apiKeys  = await SessionDao.getApiKeysByUserId(userId);
+        res.json({ apiKeys });
+
+    } catch (error) {
+        res.status(500).json({error: 'Error fetching API Keys'});
+    }
+}

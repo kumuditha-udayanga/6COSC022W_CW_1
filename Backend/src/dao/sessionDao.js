@@ -79,6 +79,21 @@ class SessionDao {
             );
         });
     }
+
+    async getApiKeysByUserId(userId) {
+        return new Promise((resolve, reject) => {
+            this.db.all(
+                `SELECT * FROM sessions WHERE user_id = ?`,
+                [userId],
+                (err, row) => {
+                    if (err) {
+                        return reject(err);
+                    }
+                    resolve(row || null);
+                }
+            );
+        });
+    }
 }
 
 export default new SessionDao();
