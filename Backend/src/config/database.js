@@ -28,6 +28,7 @@ class Database {
                 user_id INTEGER NOT NULL,
                 created_at DATETIME NOT NULL,
                 expires_at DATETIME NOT NULL,
+                is_active BOOLEAN NOT NULL,
                 FOREIGN KEY (user_id) REFERENCES users(id)
             )`;
 
